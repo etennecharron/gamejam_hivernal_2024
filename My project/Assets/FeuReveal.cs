@@ -4,18 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Windows.Speech;
-public class VoiceMovement : MonoBehaviour
+public class FeuReveal : MonoBehaviour
 {
+    public GameObject fireobj;
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
     private void Start()
     {
-        actions.Add("Forward", Forward);
-        actions.Add("Up", Up);
-        actions.Add("Down", Down);
-        actions.Add("Back", Back);
-        actions.Add("Rotate", Rotate);
+        actions.Add("fire", Fire);
 
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
@@ -28,26 +25,9 @@ public class VoiceMovement : MonoBehaviour
         actions[speech.text].Invoke();
     }
 
-    private void Forward()
+    private void Fire()
     {
-        transform.Translate(1,0,0);
-    }
-
-private void Back() {
-        transform.Translate(-1,0,0);
-    }
-    private void Up() { 
-        transform.Translate(0,1,0);
-        
-    }
-
-    private void Down() {
-    transform.Translate(0,-1,0);
-    }
-
-    private void Rotate()
-    {
-        transform.Rotate(40,30,0);
+        fireobj.SetActive(true);
     }
 
 
