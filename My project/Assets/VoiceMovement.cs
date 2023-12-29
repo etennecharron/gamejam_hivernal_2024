@@ -6,16 +6,16 @@ using UnityEngine;
 using UnityEngine.Windows.Speech;
 public class VoiceMovement : MonoBehaviour
 {
-
     private KeywordRecognizer keywordRecognizer;
     private Dictionary<string, Action> actions = new Dictionary<string, Action>();
 
     private void Start()
     {
-        actions.Add("forward", Forward);
-        actions.Add("up", Up);
-        actions.Add("down", Down);
-        actions.Add("back", Back);
+        actions.Add("avant", Forward);
+        actions.Add("haut", Up);
+        actions.Add("bas", Down);
+        actions.Add("arriere", Back);
+        actions.Add("rotation", Rotate);
 
         keywordRecognizer = new KeywordRecognizer(actions.Keys.ToArray());
         keywordRecognizer.OnPhraseRecognized += RecognizedSpeech;
@@ -45,5 +45,10 @@ private void Back() {
     transform.Translate(0,-1,0);
     }
 
-    
+    private void Rotate()
+    {
+        transform.Rotate(40,30,0);
+    }
+
+
 }
